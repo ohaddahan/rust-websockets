@@ -1332,6 +1332,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "tungstenite-example"
+version = "0.0.1"
+dependencies = [
+ "anyhow",
+ "axum",
+ "axum-extra",
+ "clap",
+ "futures",
+ "futures-util",
+ "headers",
+ "libmimalloc-sys",
+ "mimalloc",
+ "options",
+ "tikv-jemallocator",
+ "tokio",
+ "tokio-tungstenite",
+ "tower-http",
+ "tracing",
+ "tracing-subscriber",
+ "tungstenite",
+]
+
+[[package]]
 name = "typenum"
 version = "1.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

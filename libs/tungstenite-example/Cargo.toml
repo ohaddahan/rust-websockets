@@ -1,0 +1,28 @@
+[package]
+name = "tungstenite-example"
+edition = "2021"
+authors.workspace = true
+version.workspace = true
+
+[dependencies]
+tungstenite = "0.26.1"
+axum = { version = "0.8.1", features = ["ws"] }
+axum-extra = { version = "0.10.0", features = ["typed-header"] }
+futures = { version = "0.3" }
+futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
+headers = { version = "0.4" }
+tokio = { version = "1.0", features = ["full"] }
+tokio-tungstenite = { version = "0.26.0" }
+tower-http = { version = "0.6.1", features = ["fs", "trace"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+options = { path = "../options" }
+clap = { workspace = true, features = ["derive"] }
+mimalloc = { workspace = true, features = ["extended"], optional = true }
+libmimalloc-sys = { workspace = true, features = ["extended"], optional = true }
+tikv-jemallocator = { workspace = true, features = ["background_threads"], optional = true }
+anyhow = { workspace = true }
+
+[features]
+mimalloc = ["dep:mimalloc", "libmimalloc-sys"]
+jemalloc = ["dep:tikv-jemallocator"]
