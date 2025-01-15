@@ -20,7 +20,7 @@ version = "0.0.1"
 libc = { version = "0.2.169" }
 mimalloc = { version = "0.1.43" }
 libmimalloc-sys = { version = "0.1.39" }
-tikv-jemallocator = { version = "0.5", features = ["background_threads"] }
+tikv-jemallocator = { version = "0.6.0", features = ["background_threads"] }
 clap = { version = "4.5.2", features = ["derive"] }
 serde = { version = "1.0.164", features = ["derive"] }
 serde_json = { version = "1", features = ["raw_value"] }
