@@ -1,9 +1,7 @@
 mod accept_connection;
-mod mimalloc_memory_loop;
 
 use crate::accept_connection::accept_connection;
 use clap::Parser;
-use common::{memory_stats_loop, Options};
 use std::io::Error;
 use tokio::net::TcpListener;
 
@@ -13,7 +11,9 @@ use mimalloc::MiMalloc;
 #[global_allocator]
 static GLOBAL: MiMalloc = MiMalloc;
 
-use crate::mimalloc_memory_loop::mimalloc_memory_loop;
+use common::memory_stats_loop::memory_stats_loop;
+use common::mimalloc_memory_loop::mimalloc_memory_loop;
+use common::options::Options;
 #[cfg(all(feature = "jemalloc", not(feature = "mimalloc")))]
 use tikv_jemallocator::Jemalloc;
 

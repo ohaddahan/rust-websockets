@@ -17,7 +17,7 @@ authors = ["Ohad Dahan <ohaddahan@gmail.com>"]
 version = "0.0.1"
 
 [workspace.dependencies]
-libc = { version = "0.2.169" }
+libc = { version = "0.2.169", features = ["extra_traits"] }
 mimalloc = { version = "0.1.43" }
 libmimalloc-sys = { version = "0.1.39" }
 tikv-jemallocator = { version = "0.6.0", features = ["background_threads"] }

@@ -5,6 +5,7 @@ authors.workspace = true
 version.workspace = true
 
 [dependencies]
+libc = { workspace = true, features = ["extra_traits"] }
 axum = { version = "0.8.1", features = ["ws"] }
 axum-extra = { version = "0.10.0", features = ["typed-header"] }
 futures = { version = "0.3" }

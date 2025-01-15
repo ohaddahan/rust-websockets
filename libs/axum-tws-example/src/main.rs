@@ -4,12 +4,9 @@ mod handle_ws;
 use crate::handle_upgrade::handle_upgrade;
 use axum::Router;
 
-mod mimalloc_memory_loop;
 use axum::routing::any;
 
-use crate::mimalloc_memory_loop::mimalloc_memory_loop;
 use clap::Parser;
-use common::{memory_stats_loop, Options};
 #[cfg(all(feature = "mimalloc", not(feature = "jemalloc")))]
 use mimalloc::MiMalloc;
 use std::net::SocketAddr;
@@ -19,8 +16,12 @@ use tokio::net::TcpListener;
 #[global_allocator]
 static GLOBAL: MiMalloc = MiMalloc;
 
+use common::memory_stats_loop::memory_stats_loop;
+use common::mimalloc_memory_loop::mimalloc_memory_loop;
+use common::options::Options;
 #[cfg(all(feature = "jemalloc", not(feature = "mimalloc")))]
 use tikv_jemallocator::Jemalloc;
+
 #[cfg(all(feature = "jemalloc", not(feature = "mimalloc")))]
 #[global_allocator]
 static GLOBAL: Jemalloc = Jemalloc;
