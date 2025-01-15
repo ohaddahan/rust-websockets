@@ -16,7 +16,7 @@ tokio-tungstenite = { version = "0.26.0" }
 tower-http = { version = "0.6.1", features = ["fs", "trace"] }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-options = { path = "../options" }
+common = { path = "../common" }
 clap = { workspace = true, features = ["derive"] }
 mimalloc = { workspace = true, features = ["extended"], optional = true }
 libmimalloc-sys = { workspace = true, features = ["extended"], optional = true }

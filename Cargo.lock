@@ -153,12 +153,12 @@ dependencies = [
  "axum",
  "axum-extra",
  "clap",
+ "common",
  "futures",
  "futures-util",
  "headers",
  "libmimalloc-sys",
  "mimalloc",
- "options",
  "tikv-jemallocator",
  "tokio",
  "tokio-tungstenite",
@@ -311,8 +311,8 @@ dependencies = [
  "anyhow",
  "axum",
  "clap",
+ "common",
  "futures-util",
- "options",
  "tokio",
  "tokio-tungstenite",
  "uuid",
@@ -323,6 +323,17 @@ name = "colorchoice"
 version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5b63caa9aa9397e2d9480a9b13673856c78d8ac123288526c37d7839f2a86990"
+
+[[package]]
+name = "common"
+version = "0.0.1"
+dependencies = [
+ "clap",
+ "memory-stats",
+ "serde",
+ "serde_json",
+ "tokio",
+]
 
 [[package]]
 name = "cpufeatures"
@@ -698,6 +709,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "78ca9ab1a0babb1e7d5695e3530886289c18cf2f87ec19a575a0abdce112e3a3"
 
 [[package]]
+name = "memory-stats"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c73f5c649995a115e1a0220b35e4df0a1294500477f97a91d0660fb5abeb574a"
+dependencies = [
+ "libc",
+ "windows-sys 0.52.0",
+]
+
+[[package]]
 name = "mimalloc"
 version = "0.1.43"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -766,15 +787,6 @@ name = "once_cell"
 version = "1.20.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1261fe7e33c73b354eab43b1273a57c8f967d0391e80353e51f764ac02cf6775"
-
-[[package]]
-name = "options"
-version = "0.0.1"
-dependencies = [
- "clap",
- "serde",
- "serde_json",
-]
 
 [[package]]
 name = "overload"
@@ -1339,12 +1351,12 @@ dependencies = [
  "axum",
  "axum-extra",
  "clap",
+ "common",
  "futures",
  "futures-util",
  "headers",
  "libmimalloc-sys",
  "mimalloc",
- "options",
  "tikv-jemallocator",
  "tokio",
  "tokio-tungstenite",

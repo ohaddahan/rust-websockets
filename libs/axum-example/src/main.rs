@@ -7,9 +7,9 @@ use axum::{routing::any, Router};
 use crate::mimalloc_memory_loop::mimalloc_memory_loop;
 use crate::ws_handler::ws_handler;
 use clap::Parser;
+use common::{memory_stats_loop, Options};
 #[cfg(all(feature = "mimalloc", not(feature = "jemalloc")))]
 use mimalloc::MiMalloc;
-use options::Options;
 use std::net::SocketAddr;
 use tokio::net::TcpListener;
 
@@ -42,9 +42,11 @@ async fn main() -> anyhow::Result<()> {
     let listener = tokio::net::TcpListener::bind(&url).await.unwrap();
     println!("listening on {}", listener.local_addr().unwrap());
     let mimalloc_memory_loop_task = tokio::spawn(mimalloc_memory_loop());
+    let memory_stats_loop_task = tokio::spawn(memory_stats_loop());
     let server_task = server(listener, app);
     tokio::select! {
         _o = server_task => panic!("server_task dead"),
-        _o = mimalloc_memory_loop_task => panic!("mimalloc_memory_loop_task dead")
+        _o = mimalloc_memory_loop_task => panic!("mimalloc_memory_loop_task dead"),
+        _o = memory_stats_loop_task => panic!("memory_stats_loop_task dead")
     }
 }

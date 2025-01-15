@@ -3,9 +3,9 @@ mod spawn_client;
 
 use crate::spawn_client::spawn_client;
 use clap::Parser;
+use common::Options;
 use futures_util::stream::FuturesUnordered;
 use futures_util::StreamExt;
-use options::Options;
 use std::sync::Arc;
 use std::time::Instant;
 
