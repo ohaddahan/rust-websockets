@@ -448,8 +448,6 @@ dependencies = [
  "memory-stats",
  "mimalloc",
  "serde",
- "serde_json",
- "tikv-jemallocator",
  "tokio",
 ]
 

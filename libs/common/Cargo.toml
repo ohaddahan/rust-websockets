@@ -7,16 +7,9 @@ version.workspace = true
 [dependencies]
 clap = { workspace = true, features = ["derive"] }
 serde = { workspace = true, features = ["derive"] }
-serde_json = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 memory-stats = { workspace = true, features = ["always_use_statm"] }
-mimalloc = { workspace = true, features = ["extended"], optional = true }
-libmimalloc-sys = { workspace = true, features = ["extended"], optional = true }
-tikv-jemallocator = { workspace = true, features = ["background_threads"], optional = true }
+mimalloc = { workspace = true, features = ["extended"] }
+libmimalloc-sys = { workspace = true, features = ["extended"] }
 anyhow = { workspace = true }
-libc = { workspace = true, features = ["extra_traits"], optional = true }
-
-[features]
-mimalloc = ["dep:mimalloc", "libmimalloc-sys"]
-jemalloc = ["dep:tikv-jemallocator"]
-libc = ["dep:libc"]
+libc = { workspace = true, features = ["extra_traits"] }
