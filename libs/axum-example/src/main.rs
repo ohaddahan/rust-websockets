@@ -15,6 +15,7 @@ use tokio::net::TcpListener;
 #[global_allocator]
 static GLOBAL: MiMalloc = MiMalloc;
 
+use common::malloc_trim_memory_loop::malloc_trim_memory_loop;
 use common::memory_stats_loop::memory_stats_loop;
 use common::options::Options;
 #[cfg(all(feature = "jemalloc", not(feature = "mimalloc")))]
@@ -44,10 +45,12 @@ async fn main() -> anyhow::Result<()> {
     println!("listening on {}", listener.local_addr().unwrap());
     let mimalloc_memory_loop_task = tokio::spawn(mimalloc_memory_loop());
     let memory_stats_loop_task = tokio::spawn(memory_stats_loop());
+    let malloc_trim_memory_loop_task = tokio::spawn(malloc_trim_memory_loop());
     let server_task = server(listener, app);
     tokio::select! {
         _o = server_task => panic!("server_task dead"),
         _o = mimalloc_memory_loop_task => panic!("mimalloc_memory_loop_task dead"),
-        _o = memory_stats_loop_task => panic!("memory_stats_loop_task dead")
+        _o = memory_stats_loop_task => panic!("memory_stats_loop_task dead"),
+        _o = malloc_trim_memory_loop_task => panic!("malloc_trim_memory_loop_task dead")
     }
 }

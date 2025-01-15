@@ -291,6 +291,7 @@ dependencies = [
  "futures",
  "futures-util",
  "headers",
+ "libc",
  "libmimalloc-sys",
  "mimalloc",
  "serde",
@@ -442,6 +443,7 @@ version = "0.0.1"
 dependencies = [
  "anyhow",
  "clap",
+ "libc",
  "libmimalloc-sys",
  "memory-stats",
  "mimalloc",
@@ -1613,6 +1615,7 @@ dependencies = [
  "futures",
  "futures-util",
  "headers",
+ "libc",
  "libmimalloc-sys",
  "mimalloc",
  "tikv-jemallocator",

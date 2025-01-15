@@ -11,6 +11,7 @@ use mimalloc::MiMalloc;
 #[global_allocator]
 static GLOBAL: MiMalloc = MiMalloc;
 
+use common::malloc_trim_memory_loop::malloc_trim_memory_loop;
 use common::memory_stats_loop::memory_stats_loop;
 use common::mimalloc_memory_loop::mimalloc_memory_loop;
 use common::options::Options;
@@ -30,7 +31,7 @@ async fn main() -> Result<(), Error> {
     println!("Listening on: {}", url);
     let _mimalloc_memory_loop_task = tokio::spawn(mimalloc_memory_loop());
     let _memory_stats_loop_task = tokio::spawn(memory_stats_loop());
-
+    let _malloc_trim_memory_loop_task = tokio::spawn(malloc_trim_memory_loop());
     while let Ok((stream, _)) = listener.accept().await {
         tokio::spawn(accept_connection(stream, args.buffer_size));
     }

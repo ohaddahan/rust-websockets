@@ -6,6 +6,7 @@ version.workspace = true
 
 [dependencies]
 tungstenite = "0.26.1"
+libc = { workspace = true, features = ["extra_traits"], optional = true }
 axum = { version = "0.8.1", features = ["ws"] }
 axum-extra = { version = "0.10.0", features = ["typed-header"] }
 futures = { version = "0.3" }
@@ -26,3 +27,4 @@ anyhow = { workspace = true }
 [features]
 mimalloc = ["dep:mimalloc", "libmimalloc-sys"]
 jemalloc = ["dep:tikv-jemallocator"]
+libc = ["dep:libc"]
