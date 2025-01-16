@@ -45,7 +45,7 @@ Measurments are in MB done via [memory-stats](https://crates.io/crates/memory-st
 # Summary
 
 * Using `tungstenite` directly isn't a real option with `axum` due to the `API` it requires.
-* The defulat `axum` setting uses `128K` buffer which is too big for more cases, making `axum-tws` a better option (tried changing `axum-tws` config but saw no real diferences in results).
+* The default `axum` setting uses `128K` buffer which is too big for more cases, making `axum-tws` a better option (tried changing `axum-tws` config but saw no real diferences in results).
 * The difference between `axum` and `axum-tws` is over `1.3GB` versus `77MB` , very significant.
 * `malloc_trim(0)` seems to be able to reclaim the most memory but `jemalloc` is known to help in memory fragmentation and not far behind in performance, while `mimalloc` is lagging considerably. 
 
