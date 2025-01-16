@@ -5,7 +5,8 @@ Comparing the default `axum` , `axum-default` and `tungstenite` (with 1,024 size
 Adding into the comparions, different memory allocators.
 
 We first measure idle, then 10,000 connections, then we disconnect all connections.
-Measurments are in MB.
+
+Measurments are in MB done via [memory-stats](https://crates.io/crates/memory-stats) crate with `always_use_statm` feature.
 
 ## Default
 
