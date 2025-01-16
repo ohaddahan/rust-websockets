@@ -37,7 +37,7 @@ Measurments are in MB done via [memory-stats](https://crates.io/crates/memory-st
 
 | Example               | Idle     | 10,000 connections  | Diconnect   |
 |-----------------------|-----------|------------|-------------|
-| **axum-example**      | 9.75  | 1332.25 | 24.26953125    |
+| **axum-example**      | 9.75  | 1332.25 | 24.26    |
 | **axum-tws-example**  | 9.375   | 73.73   | 15.55    |
 | **tungstenite-example**| 7.87   | 47.24   | 14.19    |
 
