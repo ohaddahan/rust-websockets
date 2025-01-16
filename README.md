@@ -10,7 +10,7 @@ Measurments are in MB done via [memory-stats](https://crates.io/crates/memory-st
 
 ## Default
 
-| Example               | Idle     | 10,000 connections  | Diconnect   |
+| Example               | Idle     | 10K  | Diconnect   |
 |-----------------------|----------|------------|-------------|
 | **axum-example**      | 6.62  | 1334.125 | 45.46    |
 | **axum-tws-example**  | 6.62  | 78.0   | 77.86    |
@@ -18,7 +18,7 @@ Measurments are in MB done via [memory-stats](https://crates.io/crates/memory-st
 
 ## libc malloc_trim(0)
 
-| Example               | Idle     | 10,000 connections  | Diconnect   |
+| Example               | Idle     | 10K  | Diconnect   |
 |-----------------------|----------|------------|-------------|
 | **axum-example**      | 6.5  | 1334.5 | 9.98    |
 | **axum-tws-example**  | 6.37  | 78.12   | 9.54    |
@@ -26,7 +26,7 @@ Measurments are in MB done via [memory-stats](https://crates.io/crates/memory-st
 
 ## mimalloc mi_collect(true)
 
-| Example               | Idle     | 10,000 connections  | Diconnect   |
+| Example               | Idle     | 10K  | Diconnect   |
 |-----------------------|----------|------------|-------------|
 | **axum-example**      | 7.0  | 1294.12 | 416.96   |
 | **axum-tws-example**  | 6.87  | 72.75   | 54.66    |
@@ -35,7 +35,7 @@ Measurments are in MB done via [memory-stats](https://crates.io/crates/memory-st
 
 ## jemalloc background_threads
 
-| Example               | Idle     | 10,000 connections  | Diconnect   |
+| Example               | Idle     | 10K  | Diconnect   |
 |-----------------------|-----------|------------|-------------|
 | **axum-example**      | 9.75  | 1332.25 | 24.26    |
 | **axum-tws-example**  | 9.375   | 73.73   | 15.55    |
