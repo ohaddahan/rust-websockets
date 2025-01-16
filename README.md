@@ -1,6 +1,6 @@
 # Rust Websockets
 
-Comparing the default `axum` , `axum-default` and `tungstenite` (with 1,024 sized buffer).
+Comparing the default [axum](https://crates.io/crates/axum) , [axum-tws](https://crates.io/crates/axum-tws) and [tungstenite](https://crates.io/crates/tungstenite) (with 1,024 sized buffer).
 
 Adding into the comparions, different memory allocators.
 
