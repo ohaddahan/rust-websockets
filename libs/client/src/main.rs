@@ -2,7 +2,6 @@ mod process_message;
 mod spawn_client;
 
 use crate::spawn_client::spawn_client;
-use clap::Parser;
 use common::options::Options;
 use futures_util::stream::FuturesUnordered;
 use futures_util::StreamExt;
@@ -11,9 +10,9 @@ use std::time::Instant;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let args = Options::parse();
+    let args = Options::parse_verbose();
     let start_time = Instant::now();
-    let server = Arc::new(format!("ws://localhost:{}", args.port));
+    let server = Arc::new(format!("ws://{}:{}", args.ip, args.port));
     //spawn several clients that will concurrently talk to the server
     let mut clients = (0..args.num_clients)
         .map(|cli| tokio::spawn(spawn_client(server.clone(), cli)))

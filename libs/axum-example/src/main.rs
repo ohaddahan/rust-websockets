@@ -4,7 +4,6 @@ mod ws_handler;
 use axum::{routing::any, Router};
 
 use crate::ws_handler::ws_handler;
-use clap::Parser;
 #[cfg(all(feature = "mimalloc", not(feature = "jemalloc")))]
 use common::mimalloc_memory_loop::mimalloc_memory_loop;
 #[cfg(all(feature = "mimalloc", not(feature = "jemalloc")))]
@@ -38,11 +37,11 @@ pub async fn server(listener: TcpListener, app: Router) {
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let args = Options::parse();
+    let args = Options::parse_verbose();
     // build our application with some routes
     let app = Router::new().route("/", any(ws_handler));
     // run it with hyper
-    let url = format!("localhost:{}", args.port);
+    let url = format!("0.0.0.0:{}", args.port);
     let listener = tokio::net::TcpListener::bind(&url).await.unwrap();
     println!("listening on {}", listener.local_addr().unwrap());
     #[cfg(all(feature = "mimalloc"))]

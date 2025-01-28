@@ -27,7 +27,7 @@ static GLOBAL: Jemalloc = Jemalloc;
 #[tokio::main]
 async fn main() -> Result<(), Error> {
     let args = Options::parse();
-    let url = format!("localhost:{}", args.port);
+    let url = format!("0.0.0.0:{}", args.port);
     let try_socket = TcpListener::bind(&url).await;
     let listener = try_socket.expect("Failed to bind");
     println!("Listening on: {}", url);
