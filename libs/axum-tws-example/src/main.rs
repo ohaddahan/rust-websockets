@@ -19,6 +19,7 @@ static GLOBAL: MiMalloc = MiMalloc;
 #[cfg(all(feature = "libc"))]
 use common::malloc_trim_memory_loop::malloc_trim_memory_loop;
 use common::memory_stats_loop::memory_stats_loop;
+#[cfg(all(feature = "mimalloc", not(feature = "jemalloc")))]
 use common::mimalloc_memory_loop::mimalloc_memory_loop;
 use common::options::Options;
 #[cfg(all(feature = "jemalloc", not(feature = "mimalloc")))]
@@ -46,6 +47,7 @@ async fn main() -> anyhow::Result<()> {
     let url = format!("localhost:{}", args.port);
     let listener = tokio::net::TcpListener::bind(&url).await.unwrap();
     println!("listening on {}", listener.local_addr().unwrap());
+    #[cfg(all(feature = "mimalloc", not(feature = "jemalloc")))]
     let _mimalloc_memory_loop_task = tokio::spawn(mimalloc_memory_loop());
     let memory_stats_loop_task = tokio::spawn(memory_stats_loop());
     let server_task = server(listener, app);

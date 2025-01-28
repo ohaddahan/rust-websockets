@@ -4,6 +4,9 @@ use libc;
 use std::time::Duration;
 
 pub async fn malloc_trim_memory_loop() -> Result<(), anyhow::Error> {
+    #[cfg(target_os = "linux")]
+    #[cfg(target_env = "gnu")]
+    println!("malloc_trim activated");
     loop {
         #[allow(unused_unsafe)]
         unsafe {
