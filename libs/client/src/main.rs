@@ -12,7 +12,10 @@ use std::time::Instant;
 async fn main() -> anyhow::Result<()> {
     let args = Options::parse_verbose();
     let start_time = Instant::now();
-    let server = Arc::new(format!("ws://{}:{}", args.ip, args.port));
+    let server = match args.url {
+        Some(url) => Arc::new(url),
+        None => Arc::new(format!("ws://{}:{}", args.ip, args.port)),
+    };
     //spawn several clients that will concurrently talk to the server
     let mut clients = (0..args.num_clients)
         .map(|cli| tokio::spawn(spawn_client(server.clone(), cli, args.delay)))

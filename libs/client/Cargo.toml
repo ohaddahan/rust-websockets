@@ -8,8 +8,6 @@ version.workspace = true
 tokio = { workspace = true, features = ["full"] }
 anyhow = { workspace = true }
 futures-util = { version = "0.3.31" }
-tokio-tungstenite = { version = "0.26.1" }
-uuid = { workspace = true }
+tokio-tungstenite = { version = "0.26.1", features = ["tokio-rustls", "rustls", "native-tls"] }
 axum = "0.8.1"
 common = { path = "../common" }
-clap = { workspace = true, features = ["derive"] }

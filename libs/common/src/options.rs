@@ -13,6 +13,8 @@ pub struct Options {
     pub ip: String,
     #[clap(long, default_value = "1")]
     pub delay: u64,
+    #[clap(long)]
+    pub url: Option<String>,
 }
 
 impl Options {

@@ -5,19 +5,10 @@ authors.workspace = true
 version.workspace = true
 
 [dependencies]
-axum = { version = "0.7.9", features = ["ws"] }
+axum = { version = "0.7.9", features = ["ws", "macros"] }
 libc = { workspace = true, features = ["extra_traits"], optional = true }
 axum-tws = { workspace = true }
-axum-extra = { workspace = true, features = ["typed-header"] }
-clap = { workspace = true, features = ["derive"] }
-futures = "0.3.31"
-futures-util = "0.3.31"
-headers = "0.4.0"
-serde = { workspace = true, features = ["derive"] }
 tokio = { workspace = true, features = ["full"] }
-tokio-tungstenite = "0.26.1"
-tower-http = { version = "0.6.2", features = ["fs", "trace"] }
-tungstenite = "0.26.1"
 common = { path = "../common" }
 mimalloc = { workspace = true, features = ["extended"], optional = true }
 libmimalloc-sys = { workspace = true, features = ["extended"], optional = true }
