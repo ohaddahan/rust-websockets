@@ -1,6 +1,7 @@
 use crate::process_message::process_message;
 use axum::body::Bytes;
 use axum::extract::ws::{Message, WebSocket};
+use common::connection_counter::mut_to_connection_counter;
 use futures_util::{SinkExt, StreamExt};
 use std::net::SocketAddr;
 
@@ -35,7 +36,7 @@ pub async fn handle_socket(mut socket: WebSocket, who: SocketAddr) {
             }
         }
     });
-
+    mut_to_connection_counter(1);
     tokio::select! {
         rv_a = (&mut send_task) => {
             match rv_a {
@@ -52,4 +53,5 @@ pub async fn handle_socket(mut socket: WebSocket, who: SocketAddr) {
             send_task.abort();
         }
     }
+    mut_to_connection_counter(-1);
 }
