@@ -1,6 +1,4 @@
-FROM --platform=$BUILDPLATFORM ohaddahan/rust-rust-websockets:latest
-ARG BUILDPLATFORM
-ARG TARGETPLATFORM
+FROM ohaddahan/rust-rust-websockets:latest
 ARG DEBIAN_FRONTEND=noninteractive
 RUN git clone https://github.com/ohaddahan/rust-websockets.git \
     && cd rust-websockets \

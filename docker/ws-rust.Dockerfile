@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM ohaddahan/base-rust-websockets:latest
+FROM ohaddahan/base-rust-websockets:latest
 ARG BUILDPLATFORM
 ARG TARGETPLATFORM
 ARG DEBIAN_FRONTEND=noninteractive

@@ -1,6 +1,4 @@
-FROM --platform=$BUILDPLATFORM ubuntu:24.04
-ARG BUILDPLATFORM
-ARG TARGETPLATFORM
+FROM ubuntu:24.04
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 RUN apt-get install curl gzip git-all -y
