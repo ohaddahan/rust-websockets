@@ -6,7 +6,6 @@ use tokio::time::sleep;
 pub fn proc() {
     #[cfg(target_os = "linux")]
     {
-        use procfs::process::Process;
         if let Ok(me) = procfs::process::Process::myself() {
             if let Ok(fd_count) = me.fd_count() {
                 println!("fd_count = {}", fd_count);
