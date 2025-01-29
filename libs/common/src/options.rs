@@ -1,5 +1,6 @@
 use clap::Parser;
 use serde::{Deserialize, Serialize};
+use std::env;
 
 #[derive(Parser, Clone, Serialize, Deserialize, Debug)]
 pub struct Options {
@@ -19,8 +20,12 @@ pub struct Options {
 
 impl Options {
     pub fn parse_verbose() -> Self {
-        let args = Options::parse();
-        println!("args = {:#?}", args);
+        let mut args = Options::parse();
+        println!("pre env args = {:#?}", args);
+        if let Ok(port) = env::var("PORT") {
+            args.port = port.parse().unwrap_or(8000);
+        }
+        println!("post env args = {:#?}", args);
         args
     }
 }
