@@ -15,7 +15,7 @@ async fn main() -> anyhow::Result<()> {
     let server = Arc::new(format!("ws://{}:{}", args.ip, args.port));
     //spawn several clients that will concurrently talk to the server
     let mut clients = (0..args.num_clients)
-        .map(|cli| tokio::spawn(spawn_client(server.clone(), cli)))
+        .map(|cli| tokio::spawn(spawn_client(server.clone(), cli, args.delay)))
         .collect::<FuturesUnordered<_>>();
     println!("launched {}", clients.len());
     //wait for all our clients to exit

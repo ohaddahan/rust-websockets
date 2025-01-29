@@ -11,6 +11,8 @@ pub struct Options {
     pub buffer_size: usize,
     #[clap(long, default_value = "localhost")]
     pub ip: String,
+    #[clap(long, default_value = "1")]
+    pub delay: u64,
 }
 
 impl Options {

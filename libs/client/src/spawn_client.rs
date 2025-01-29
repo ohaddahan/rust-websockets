@@ -2,10 +2,13 @@ use crate::process_message::process_message;
 use axum::body::Bytes;
 use futures_util::{SinkExt, StreamExt};
 use std::sync::Arc;
+use std::time::Duration;
+use tokio::time::sleep;
 use tokio_tungstenite::connect_async;
 use tokio_tungstenite::tungstenite::Message;
 
-pub async fn spawn_client(server: Arc<String>, who: usize) {
+pub async fn spawn_client(server: Arc<String>, who: usize, delay: u64) {
+    sleep(Duration::from_millis(delay)).await;
     let url = format!("{}", server);
     let ws_stream = match connect_async(url).await {
         Ok((stream, _response)) => stream,
