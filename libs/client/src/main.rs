@@ -16,15 +16,12 @@ async fn main() -> anyhow::Result<()> {
         Some(url) => Arc::new(url),
         None => Arc::new(format!("ws://{}:{}", args.ip, args.port)),
     };
-    //spawn several clients that will concurrently talk to the server
     let mut clients = (0..args.num_clients)
         .map(|cli| tokio::spawn(spawn_client(server.clone(), cli, args.delay)))
         .collect::<FuturesUnordered<_>>();
     println!("launched {}", clients.len());
-    //wait for all our clients to exit
     while clients.next().await.is_some() {}
     let end_time = Instant::now();
-    //total time should be the same no matter how many clients we spawn
     println!(
         "Total time taken {:#?} with {} concurrent clients.",
         end_time - start_time,

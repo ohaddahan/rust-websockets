@@ -38,11 +38,9 @@ pub async fn server(listener: TcpListener, app: Router) {
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let args = Options::parse_verbose();
-    // build our application with some routes
     let app = Router::new().route("/", any(ws_handler));
-    // run it with hyper
     let url = format!("0.0.0.0:{}", args.port);
-    let listener = tokio::net::TcpListener::bind(&url).await.unwrap();
+    let listener = TcpListener::bind(&url).await.unwrap();
     println!("listening on {}", listener.local_addr().unwrap());
     #[cfg(all(feature = "mimalloc"))]
     let _mimalloc_memory_loop_task = tokio::spawn(mimalloc_memory_loop());
