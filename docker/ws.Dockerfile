@@ -18,9 +18,6 @@ RUN apt-get install -y --no-install-recommends openssl ca-certificates
 FROM base AS builder
 RUN git clone https://github.com/ohaddahan/rust-websockets.git \
     && cd rust-websockets \
-    && cargo build \
-    && cargo build --features libc \
-    && cargo build --features mimalloc \
     && cargo build --features jemalloc
 FROM builder AS runner
 #CMD ["/rust-websockets/target/axum-example"]
