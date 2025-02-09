@@ -13,4 +13,8 @@ PORT="${1}"
 NAME="${2}"
 
 set -x
-docker run -p "${PORT}:${PORT}" -e NAME="${NAME}" -t ohaddahan/rust-websockets
+if [ "${NAME}" = "client" ] ; then
+  docker run -e PORT="${PORT}" -e NAME="${NAME}" -t ohaddahan/rust-websockets
+else
+  docker run -p "${PORT}:${PORT}" -e PORT="${PORT}" -e NAME="${NAME}" -t ohaddahan/rust-websockets
+fi
