@@ -1,0 +1,29 @@
+# https://github.com/LukeMathWalker/zero-to-production/blob/main/.github/workflows/general.yml
+name: FMT
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - master
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  fmt:
+    name: Rustfmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: ${{ vars.RUSTC_VERSION }}
+          components: rustfmt
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: rustfmt-${{ vars.SQLX_VERSION }}
+          cache-all-crates: true
+      - name: Enforce formatting
+        run: cargo fmt --all -- --check
