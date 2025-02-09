@@ -11,7 +11,7 @@ use mimalloc::MiMalloc;
 #[global_allocator]
 static GLOBAL: MiMalloc = MiMalloc;
 
-#[cfg(all(feature = "libc"))]
+#[cfg(feature = "libc")]
 use common::malloc_trim_memory_loop::malloc_trim_memory_loop;
 use common::memory_stats_loop::memory_stats_loop;
 #[cfg(all(feature = "mimalloc", not(feature = "jemalloc")))]
@@ -34,7 +34,7 @@ async fn main() -> Result<(), Error> {
     #[cfg(all(feature = "mimalloc", not(feature = "jemalloc")))]
     let _mimalloc_memory_loop_task = tokio::spawn(mimalloc_memory_loop());
     let _memory_stats_loop_task = tokio::spawn(memory_stats_loop());
-    #[cfg(all(feature = "libc"))]
+    #[cfg(feature = "libc")]
     let _malloc_trim_memory_loop_task = tokio::spawn(malloc_trim_memory_loop());
     while let Ok((stream, _)) = listener.accept().await {
         tokio::spawn(accept_connection(stream, args.buffer_size));
