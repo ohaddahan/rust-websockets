@@ -90,7 +90,7 @@ jobs:
         with:
           key: upload-assets-manager-${{ matrix.target }}
           cache-all-crates: true
-      - name: "Build Worker"
+      - name: "Build Binaries"
         run: |
           cargo build --release --features jemalloc
           tar acf rust-websockets-${{ matrix.target }}.tar.gz target/release/client target/release/tungstenite-example target/release/axum-example target/release/axum-tws-example target/release/axum-example-with-ws-extractor
