@@ -1,31 +1,57 @@
+use anyhow::anyhow;
 use clap::Parser;
 use serde::{Deserialize, Serialize};
 use std::env;
 
 #[derive(Parser, Clone, Serialize, Deserialize, Debug)]
-pub struct Options {
-    #[clap(long, default_value = "8000")]
-    pub port: u16,
-    #[clap(long, default_value = "10000")]
+pub struct ClientOptions {
     pub num_clients: usize,
-    #[clap(long, default_value = "1024")]
-    pub buffer_size: usize,
-    #[clap(long, default_value = "localhost")]
-    pub ip: String,
     #[clap(long, default_value = "1")]
     pub delay: u64,
     #[clap(long)]
-    pub url: Option<String>,
+    pub url: String,
+}
+
+#[derive(Parser, Clone, Serialize, Deserialize, Debug)]
+pub struct ServerOptions {
+    #[clap(long, default_value = "1024")]
+    pub buffer_size: usize,
+    #[clap(long)]
+    pub url: String,
+}
+
+#[derive(Parser, Clone, Serialize, Deserialize, Debug)]
+pub enum Options {
+    ServerOptions(ServerOptions),
+    ClientOptions(ClientOptions),
 }
 
 impl Options {
     pub fn parse_verbose() -> Self {
         let mut args = Options::parse();
-        println!("pre env args = {:#?}", args);
-        if let Ok(port) = env::var("PORT") {
-            args.port = port.parse().unwrap_or(8000);
+        if let Ok(url) = env::var("URL") {
+            match args {
+                Options::ServerOptions(ref mut margs) => margs.url = url,
+                Options::ClientOptions(ref mut margs) => margs.url = url,
+            }
         }
-        println!("post env args = {:#?}", args);
+        println!("args = {:#?}", args);
         args
+    }
+
+    pub fn server_options() -> anyhow::Result<ServerOptions> {
+        let args = Options::parse_verbose();
+        match args {
+            Options::ServerOptions(args) => Ok(args),
+            _ => Err(anyhow!("Provide server options")),
+        }
+    }
+
+    pub fn client_options() -> anyhow::Result<ClientOptions> {
+        let args = Options::parse_verbose();
+        match args {
+            Options::ClientOptions(args) => Ok(args),
+            _ => Err(anyhow!("Provide client options")),
+        }
     }
 }
