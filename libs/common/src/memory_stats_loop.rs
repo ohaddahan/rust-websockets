@@ -13,7 +13,7 @@ pub fn get_fd_count() -> usize {
             }
         }
     }
-    return 0;
+    0
 }
 
 pub fn get_memory_stats() -> f64 {
@@ -26,7 +26,7 @@ pub fn get_memory_stats() -> f64 {
 
 pub async fn memory_stats_loop() {
     loop {
-        let stats = Stats::new();
+        let stats = Stats::default();
         if env::var("VERBOSE").is_ok() {
             println!("stats = {:#?}", stats);
         }
