@@ -9,7 +9,7 @@ resolver = "2"
 
 [workspace.package]
 authors = ["Ohad Dahan <ohaddahan@gmail.com>"]
-version = "0.0.2"
+version = "0.0.3"
 
 [workspace.dependencies]
 procfs = { version = "0.17.0" }
