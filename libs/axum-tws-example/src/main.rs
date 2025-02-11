@@ -21,6 +21,7 @@ use common::memory_stats_loop::memory_stats_loop;
 #[cfg(all(feature = "mimalloc", not(feature = "jemalloc")))]
 use common::mimalloc_memory_loop::mimalloc_memory_loop;
 use common::options::Options;
+use common::stats::stats;
 use common::tcp_listener::multi_server;
 use common::version::version;
 #[cfg(all(feature = "jemalloc", not(feature = "mimalloc")))]
@@ -44,6 +45,7 @@ async fn main() -> anyhow::Result<()> {
     let args = Options::server_options()?;
     let app: Router<_> = Router::new()
         .route("/ws", any(handle_upgrade))
+        .route("/stats", any(stats))
         .route("/", get(version));
 
     let _ = multi_server(app, args.urls).await;

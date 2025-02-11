@@ -14,5 +14,6 @@ mimalloc = { workspace = true, features = ["extended"] }
 libmimalloc-sys = { workspace = true, features = ["extended"] }
 anyhow = { workspace = true }
 libc = { workspace = true, features = ["extra_traits"] }
+hostname = "0.4.0"
 [target.'cfg(target_os = "linux")'.dependencies]
 procfs = { workspace = true }
