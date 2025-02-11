@@ -14,8 +14,8 @@ pub struct Stats {
     hostname: String,
 }
 
-impl Stats {
-    pub fn new() -> Self {
+impl Default for Stats {
+    fn default() -> Self {
         let pid = process::id();
         let connections = get_connection_counter();
         let fd_count = get_fd_count();
@@ -36,6 +36,6 @@ impl Stats {
 }
 
 pub async fn stats() -> impl IntoResponse {
-    let stats = Stats::new();
+    let stats = Stats::default();
     Json(stats)
 }

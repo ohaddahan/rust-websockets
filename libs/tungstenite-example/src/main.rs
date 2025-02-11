@@ -39,7 +39,7 @@ async fn main() -> anyhow::Result<()> {
     let _malloc_trim_memory_loop_task = tokio::spawn(malloc_trim_memory_loop());
     for url in args.urls {
         let listener = get_tcp_listener(&url).await?;
-        let _ = tokio::spawn(listen_loop(listener, args.buffer_size));
+        tokio::spawn(listen_loop(listener, args.buffer_size));
     }
     Ok(())
 }
