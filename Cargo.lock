@@ -156,7 +156,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6d6fd624c75e18b3b4c6b9caf42b1afe24437daaee904069137d8bab077be8b8"
 dependencies = [
  "axum-core 0.5.0",
- "base64",
  "bytes",
  "form_urlencoded",
  "futures-util",
@@ -176,10 +175,8 @@ dependencies = [
  "serde_json",
  "serde_path_to_error",
  "serde_urlencoded",
- "sha1",
  "sync_wrapper",
  "tokio",
- "tokio-tungstenite 0.26.1",
  "tower",
  "tower-layer",
  "tower-service",
@@ -229,10 +226,10 @@ dependencies = [
 
 [[package]]
 name = "axum-example"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "anyhow",
- "axum 0.8.1",
+ "axum 0.7.9",
  "common",
  "futures",
  "futures-util",
@@ -245,7 +242,7 @@ dependencies = [
 
 [[package]]
 name = "axum-example-with-ws-extractor"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "anyhow",
  "axum 0.7.9",
@@ -292,7 +289,7 @@ dependencies = [
 
 [[package]]
 name = "axum-tws-example"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "anyhow",
  "axum 0.7.9",
@@ -307,7 +304,7 @@ dependencies = [
 
 [[package]]
 name = "axum-ws-extractor"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "async-trait",
  "axum 0.7.9",
@@ -446,7 +443,7 @@ checksum = "f46ad14479a25103f283c0f10005961cf086d8dc42205bb44c46ac563475dca6"
 
 [[package]]
 name = "client"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "anyhow",
  "axum 0.8.1",
@@ -464,9 +461,10 @@ checksum = "5b63caa9aa9397e2d9480a9b13673856c78d8ac123288526c37d7839f2a86990"
 
 [[package]]
 name = "common"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "anyhow",
+ "axum 0.7.9",
  "clap",
  "libc",
  "libmimalloc-sys",
@@ -1755,7 +1753,7 @@ dependencies = [
 
 [[package]]
 name = "tungstenite-example"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "anyhow",
  "clap",

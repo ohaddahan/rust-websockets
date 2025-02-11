@@ -4,6 +4,7 @@ mod ws_handler;
 use axum::{routing::any, Router};
 
 use crate::ws_handler::ws_handler;
+use axum::routing::get;
 #[cfg(all(feature = "mimalloc", not(feature = "jemalloc")))]
 use common::mimalloc_memory_loop::mimalloc_memory_loop;
 #[cfg(all(feature = "mimalloc", not(feature = "jemalloc")))]
@@ -19,7 +20,8 @@ static GLOBAL: MiMalloc = MiMalloc;
 use common::malloc_trim_memory_loop::malloc_trim_memory_loop;
 use common::memory_stats_loop::memory_stats_loop;
 use common::options::Options;
-use common::tcp_listener::get_tcp_listener;
+use common::tcp_listener::multi_server;
+use common::version::version;
 #[cfg(all(feature = "jemalloc", not(feature = "mimalloc")))]
 use tikv_jemallocator::Jemalloc;
 
@@ -38,17 +40,20 @@ pub async fn server(listener: TcpListener, app: Router) {
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let app = Router::new().route("/", any(ws_handler));
+    let app = Router::new()
+        .route("/ws", any(ws_handler))
+        .route("/", get(version));
+
     let args = Options::server_options()?;
-    let listener = get_tcp_listener(&args).await?;
+    let _ = multi_server(app, args.urls).await;
     #[cfg(feature = "mimalloc")]
     let _mimalloc_memory_loop_task = tokio::spawn(mimalloc_memory_loop());
     let memory_stats_loop_task = tokio::spawn(memory_stats_loop());
     #[cfg(feature = "libc")]
     let _malloc_trim_memory_loop_task = tokio::spawn(malloc_trim_memory_loop());
-    let server_task = server(listener, app);
+    // let server_task = server(listener, app);
     tokio::select! {
-        _o = server_task => panic!("server_task dead"),
+        // _o = server_task => panic!("server_task dead"),
         _o = memory_stats_loop_task => panic!("memory_stats_loop_task dead")
     }
 }

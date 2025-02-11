@@ -5,6 +5,7 @@ authors.workspace = true
 version.workspace = true
 
 [dependencies]
+axum = { version = "0.7.9", features = ["ws", "macros"] }
 clap = { workspace = true, features = ["derive"] }
 serde = { workspace = true, features = ["derive"] }
 tokio = { workspace = true, features = ["full"] }

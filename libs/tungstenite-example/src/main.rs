@@ -17,22 +17,29 @@ use common::options::Options;
 use common::tcp_listener::get_tcp_listener;
 #[cfg(all(feature = "jemalloc", not(feature = "mimalloc")))]
 use tikv_jemallocator::Jemalloc;
+use tokio::net::TcpListener;
 
 #[cfg(all(feature = "jemalloc", not(feature = "mimalloc")))]
 #[global_allocator]
 static GLOBAL: Jemalloc = Jemalloc;
 
+pub async fn listen_loop(listener: TcpListener, buffer_size: usize) {
+    while let Ok((stream, _)) = listener.accept().await {
+        tokio::spawn(accept_connection(stream, buffer_size));
+    }
+}
+
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let args = Options::server_options()?;
-    let listener = get_tcp_listener(&args).await?;
     #[cfg(all(feature = "mimalloc", not(feature = "jemalloc")))]
     let _mimalloc_memory_loop_task = tokio::spawn(mimalloc_memory_loop());
     let _memory_stats_loop_task = tokio::spawn(memory_stats_loop());
     #[cfg(feature = "libc")]
     let _malloc_trim_memory_loop_task = tokio::spawn(malloc_trim_memory_loop());
-    while let Ok((stream, _)) = listener.accept().await {
-        tokio::spawn(accept_connection(stream, args.buffer_size));
+    for url in args.urls {
+        let listener = get_tcp_listener(&url).await?;
+        let _ = tokio::spawn(listen_loop(listener, args.buffer_size));
     }
     Ok(())
 }
