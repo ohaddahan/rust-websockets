@@ -19,6 +19,7 @@ static GLOBAL: MiMalloc = MiMalloc;
 use common::malloc_trim_memory_loop::malloc_trim_memory_loop;
 use common::memory_stats_loop::memory_stats_loop;
 use common::options::Options;
+use common::tcp_listener::get_tcp_listener;
 #[cfg(all(feature = "jemalloc", not(feature = "mimalloc")))]
 use tikv_jemallocator::Jemalloc;
 
@@ -37,11 +38,9 @@ pub async fn server(listener: TcpListener, app: Router) {
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let args = Options::parse_verbose();
     let app = Router::new().route("/", any(ws_handler));
-    let url = format!("0.0.0.0:{}", args.port);
-    let listener = TcpListener::bind(&url).await.unwrap();
-    println!("listening on {}", listener.local_addr().unwrap());
+    let args = Options::server_options()?;
+    let listener = get_tcp_listener(&args).await?;
     #[cfg(feature = "mimalloc")]
     let _mimalloc_memory_loop_task = tokio::spawn(mimalloc_memory_loop());
     let memory_stats_loop_task = tokio::spawn(memory_stats_loop());

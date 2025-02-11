@@ -16,6 +16,7 @@ clap = { workspace = true, features = ["derive"] }
 mimalloc = { workspace = true, features = ["extended"], optional = true }
 libmimalloc-sys = { workspace = true, features = ["extended"], optional = true }
 tikv-jemallocator = { workspace = true, features = ["background_threads"], optional = true }
+anyhow = "1.0.95"
 
 [features]
 mimalloc = ["dep:mimalloc", "libmimalloc-sys"]
