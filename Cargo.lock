@@ -226,7 +226,7 @@ dependencies = [
 
 [[package]]
 name = "axum-example"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "anyhow",
  "axum 0.7.9",
@@ -242,7 +242,7 @@ dependencies = [
 
 [[package]]
 name = "axum-example-with-ws-extractor"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "anyhow",
  "axum 0.7.9",
@@ -289,7 +289,7 @@ dependencies = [
 
 [[package]]
 name = "axum-tws-example"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "anyhow",
  "axum 0.7.9",
@@ -304,7 +304,7 @@ dependencies = [
 
 [[package]]
 name = "axum-ws-extractor"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "async-trait",
  "axum 0.7.9",
@@ -443,7 +443,7 @@ checksum = "f46ad14479a25103f283c0f10005961cf086d8dc42205bb44c46ac563475dca6"
 
 [[package]]
 name = "client"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "anyhow",
  "axum 0.8.1",
@@ -461,7 +461,7 @@ checksum = "5b63caa9aa9397e2d9480a9b13673856c78d8ac123288526c37d7839f2a86990"
 
 [[package]]
 name = "common"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "anyhow",
  "axum 0.7.9",
@@ -1753,7 +1753,7 @@ dependencies = [
 
 [[package]]
 name = "tungstenite-example"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "anyhow",
  "clap",
