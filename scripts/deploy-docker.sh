@@ -21,6 +21,11 @@ function build_ws() {
   docker buildx build --no-cache --platform=linux/arm64,linux/amd64 -t ohaddahan/rust-websockets -f docker/ws.Dockerfile . --push
 }
 
+function build_server() {
+  docker_pull
+  docker buildx build --no-cache --platform=linux/arm64,linux/amd64 -t ohaddahan/server-websockets -f docker/server.Dockerfile . --push
+}
+
 if [ -z "${1}" ] ; then
   echo "Missing argument"
 else
