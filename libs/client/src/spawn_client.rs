@@ -22,9 +22,7 @@ pub async fn spawn_client(server: Arc<String>, who: usize, delay: u64) {
 
     //we can ping the server for start
     sender
-        .send(Message::Ping(axum::body::Bytes::from_static(
-            b"Hello, Server!",
-        )))
+        .send(Message::Ping(Bytes::from_static(b"Hello, Server!")))
         .await
         .expect("Can not send!");
 
@@ -38,7 +36,7 @@ pub async fn spawn_client(server: Arc<String>, who: usize, delay: u64) {
             {
                 break;
             }
-            tokio::time::sleep(std::time::Duration::from_millis(15_000)).await;
+            tokio::time::sleep(Duration::from_millis(15_000)).await;
         }
     });
 

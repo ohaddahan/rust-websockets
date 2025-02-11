@@ -1,5 +1,5 @@
 use crate::process_message::process_message;
-use axum::body::Bytes;
+// use axum::body::Bytes;
 use axum::extract::ws::{Message, WebSocket};
 use common::connection_counter::mut_to_connection_counter;
 use futures_util::{SinkExt, StreamExt};
@@ -7,7 +7,8 @@ use std::net::SocketAddr;
 
 pub async fn handle_socket(mut socket: WebSocket, who: SocketAddr) {
     if socket
-        .send(Message::Ping(Bytes::from_static(&[1, 2, 3])))
+        // .send(Message::Ping(Bytes::from_static(&[1, 2, 3])))
+        .send(Message::Ping(vec![1, 2, 3]))
         .await
         .is_err()
     {
@@ -19,7 +20,8 @@ pub async fn handle_socket(mut socket: WebSocket, who: SocketAddr) {
     let mut send_task = tokio::spawn(async move {
         loop {
             if sender
-                .send(Message::Ping(Bytes::from_static(&[1, 2, 3])))
+                // .send(Message::Ping(Bytes::from_static(&[1, 2, 3])))
+                .send(Message::Ping(vec![1, 2, 3]))
                 .await
                 .is_err()
             {

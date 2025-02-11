@@ -156,7 +156,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6d6fd624c75e18b3b4c6b9caf42b1afe24437daaee904069137d8bab077be8b8"
 dependencies = [
  "axum-core 0.5.0",
- "base64",
  "bytes",
  "form_urlencoded",
  "futures-util",
@@ -176,10 +175,8 @@ dependencies = [
  "serde_json",
  "serde_path_to_error",
  "serde_urlencoded",
- "sha1",
  "sync_wrapper",
  "tokio",
- "tokio-tungstenite 0.26.1",
  "tower",
  "tower-layer",
  "tower-service",
@@ -232,7 +229,7 @@ name = "axum-example"
 version = "0.0.1"
 dependencies = [
  "anyhow",
- "axum 0.8.1",
+ "axum 0.7.9",
  "common",
  "futures",
  "futures-util",
@@ -467,6 +464,7 @@ name = "common"
 version = "0.0.1"
 dependencies = [
  "anyhow",
+ "axum 0.7.9",
  "clap",
  "libc",
  "libmimalloc-sys",

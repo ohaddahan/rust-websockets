@@ -6,7 +6,8 @@ version.workspace = true
 
 [dependencies]
 libc = { workspace = true, features = ["extra_traits"], optional = true }
-axum = { version = "0.8.1", features = ["ws"] }
+#axum = { version = "0.8.1", features = ["ws"] }
+axum = { version = "0.7.9", features = ["ws", "macros"] }
 futures = { version = "0.3" }
 futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
 tokio = { version = "1.0", features = ["full"] }
