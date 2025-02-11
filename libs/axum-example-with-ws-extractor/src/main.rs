@@ -20,6 +20,7 @@ static GLOBAL: MiMalloc = MiMalloc;
 use common::malloc_trim_memory_loop::malloc_trim_memory_loop;
 use common::memory_stats_loop::memory_stats_loop;
 use common::options::Options;
+use common::stats::stats;
 use common::tcp_listener::multi_server;
 use common::version::version;
 #[cfg(all(feature = "jemalloc", not(feature = "mimalloc")))]
@@ -42,6 +43,7 @@ pub async fn server(listener: TcpListener, app: Router) {
 async fn main() -> anyhow::Result<()> {
     let app = Router::new()
         .route("/ws", any(ws_handler))
+        .route("/stats", any(stats))
         .route("/", get(version));
 
     let args = Options::server_options()?;
